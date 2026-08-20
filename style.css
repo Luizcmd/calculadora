@@ -6,141 +6,166 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1a4d 25%, #2d0f5f 50%, #1a0033 75%, #0f0a1f 100%);
+    background-attachment: fixed;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de estrelas */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20% 30%, #eee, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 60% 70%, #fff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 50% 50%, #ddd, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 80% 10%, #fff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 90% 60%, #eee, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 30% 80%, #fff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 200% 200%;
+    pointer-events: none;
+    z-index: 0;
+    animation: twinkle 5s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
 }
 
 .container {
     width: 100%;
-    max-width: 500px;
+    max-width: 420px;
+    position: relative;
+    z-index: 1;
 }
 
-.form-container {
-    background: white;
+.calculadora {
+    background: linear-gradient(145deg, rgba(26, 26, 62, 0.95), rgba(45, 45, 95, 0.95));
     padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 0 40px rgba(100, 180, 255, 0.2);
+    border: 2px solid rgba(100, 150, 255, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 h1 {
-    color: #333;
+    color: #fff;
     margin-bottom: 30px;
     text-align: center;
-    font-size: 28px;
+    font-size: 26px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-shadow: 0 0 20px rgba(100, 180, 255, 0.5);
+}
+
+#formImc {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .form-group {
-    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
 }
 
-label {
-    margin-bottom: 8px;
-    color: #555;
+.form-group label {
+    color: #aaa;
+    font-size: 14px;
     font-weight: 500;
-    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="date"],
-select,
-textarea {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    font-family: inherit;
-    transition: border-color 0.3s, box-shadow 0.3s;
+.form-group input {
+    padding: 12px 15px;
+    background: linear-gradient(145deg, rgba(13, 13, 26, 0.8), rgba(26, 26, 45, 0.8));
+    border: 2px solid #404070;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-input[type="date"]:focus,
-select:focus,
-textarea:focus {
+.form-group input:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #64b3ff;
+    box-shadow: 0 0 15px rgba(100, 179, 255, 0.3);
+    background: linear-gradient(145deg, rgba(20, 20, 40, 0.9), rgba(30, 30, 55, 0.9));
 }
 
-textarea {
-    resize: vertical;
-    min-height: 100px;
+.form-group input::placeholder {
+    color: #666;
 }
 
-.form-group.checkbox {
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.form-group.checkbox input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.form-group.checkbox label {
-    margin-bottom: 0;
-    cursor: pointer;
-    font-weight: 400;
-}
-
-.btn-submit,
-.btn-reset {
-    padding: 12px 30px;
+.btn-calcular,
+.btn-limpar {
+    padding: 14px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
-    margin-right: 10px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.btn-submit {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    width: 48%;
+.btn-calcular {
+    background: linear-gradient(145deg, #51cf66, #37b24d);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(81, 207, 102, 0.3);
 }
 
-.btn-submit:hover {
+.btn-calcular:hover {
+    background: linear-gradient(145deg, #69db7c, #51cf66);
+    box-shadow: 0 6px 18px rgba(81, 207, 102, 0.5);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
 }
 
-.btn-submit:active {
+.btn-calcular:active {
     transform: translateY(0);
 }
 
-.btn-reset {
-    background: #e0e0e0;
-    color: #333;
-    width: 48%;
+.btn-limpar {
+    background: linear-gradient(145deg, #667eea, #5568d3);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
-.btn-reset:hover {
-    background: #d0d0d0;
+.btn-limpar:hover {
+    background: linear-gradient(145deg, #7b8eff, #667eea);
+    box-shadow: 0 6px 18px rgba(102, 126, 234, 0.5);
+    transform: translateY(-2px);
 }
 
-.mensagem-sucesso {
-    margin-top: 20px;
-    padding: 15px;
-    background: #4caf50;
-    color: white;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: 500;
-    animation: slideIn 0.3s ease-out;
+.btn-limpar:active {
+    transform: translateY(0);
+}
+
+.resultado {
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(145deg, rgba(13, 13, 26, 0.8), rgba(26, 26, 45, 0.8));
+    border-radius: 10px;
+    border: 2px solid rgba(100, 150, 255, 0.3);
+    animation: slideIn 0.4s ease-out;
 }
 
 @keyframes slideIn {
@@ -154,19 +179,70 @@ textarea {
     }
 }
 
-@media (max-width: 600px) {
-    .form-container {
+.imc-valor {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.imc-valor span {
+    color: #aaa;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.imc-valor h2 {
+    color: #51cf66;
+    font-size: 48px;
+    font-weight: 300;
+    margin-top: 10px;
+    text-shadow: 0 0 15px rgba(81, 207, 102, 0.4);
+}
+
+.classificacao {
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.classificacao.normal {
+    background: rgba(81, 207, 102, 0.2);
+    color: #69db7c;
+    border: 1px solid #51cf66;
+}
+
+.classificacao.sobrepeso {
+    background: rgba(255, 193, 7, 0.2);
+    color: #ffd54f;
+    border: 1px solid #ffc107;
+}
+
+.classificacao.obesidade {
+    background: rgba(255, 107, 107, 0.2);
+    color: #ff7f7f;
+    border: 1px solid #ff6b6b;
+}
+
+.classificacao.abaixo {
+    background: rgba(102, 126, 234, 0.2);
+    color: #7b8eff;
+    border: 1px solid #667eea;
+}
+
+@media (max-width: 480px) {
+    .calculadora {
         padding: 30px 20px;
     }
 
     h1 {
-        font-size: 24px;
+        font-size: 22px;
     }
 
-    .btn-submit,
-    .btn-reset {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 10px;
+    .imc-valor h2 {
+        font-size: 40px;
     }
 }
